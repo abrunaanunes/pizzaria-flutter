@@ -1,16 +1,17 @@
-# gopizza
+# GoPizza
 
-A new Flutter project.
+## Atenção!
+Este projeto foi desenvolvido para fins de avaliação para a disciplina de Desenvolvimento Mobile
+ministrada pelo professor Diego Roberto Antunes na Universidade Tecnológica Federal do Paraná - Campi Ponta Grossa
 
-## Getting Started
+## Pré Requisitos
 
-This project is a starting point for a Flutter application.
+## Instalação
 
-A few resources to get you started if this is your first Flutter project:
+## Sobre o sistema
+O sistema GoPizza é uma proposta de aplicativo de delivery de pizza. Nesse sentido, o cliente poderá fazer login, cadastrar-se, realizar um pedido, consultar pedidos já realizados, visualizar cardápio, filtrar por sabor, ver promoções e realizar pagamento.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Partes desenvolvidas:
+#### Bruna Nunes (RA: 2328585)
+#### Maria Eduarda Freitas (RA: 2317559)
+#### Caroline Wagner (RA: 0000000)
