@@ -11,11 +11,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    Color scaffoldColor = const Color.fromARGB(255, 250, 248, 249);
     return MaterialApp(
       title: 'Go Pizza',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.red,
+        scaffoldBackgroundColor: scaffoldColor,
       ),
       home: const SignInScreen(),
     );
