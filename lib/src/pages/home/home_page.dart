@@ -1,21 +1,19 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
-
 import 'components/category_tile.dart';
+import 'package:gopizza/src/repositories/home.dart' as home_repository;
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
   Widget build(BuildContext context) {
     Color customGreyColor = const Color.fromARGB(255, 68, 66, 67);
-    List<String> categories = [
-      'Tradicionais',
-      'Especiais',
-      'Doces',
-      'Calzones',
-      'Promoções',
-    ];
     String selectedCategory = 'Tradicionais';
     return Scaffold(
         appBar: AppBar(
@@ -107,12 +105,35 @@ class HomePage extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (_, index) {
                     return CategoryTile(
-                      category: categories[index],
-                      isSelected: categories[index] == selectedCategory,
+                      category: home_repository.categories[index],
+                      isSelected:
+                          home_repository.categories[index] == selectedCategory,
                     );
                   },
                   separatorBuilder: (_, index) => const SizedBox(width: 10),
-                  itemCount: categories.length,
+                  itemCount: home_repository.categories.length,
+                ),
+              ),
+              Card(
+                clipBehavior: Clip.antiAlias,
+                child: Column(
+                  children: [
+                    ListTile(
+                      title: const Text('Pizza de calabresa'),
+                      subtitle: Text(
+                        'Serve duas pessoas',
+                        style: TextStyle(color: Colors.black.withOpacity(0.6)),
+                      ),
+                    ),
+                    Image.asset('assets/images/pizza_calabresa.jpg'),
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Text(
+                        'Molho de tomate, muçarela, calabresa fatiada, cebola fatiada, palmito, azeitonas verdes fatiada e orégano.',
+                        style: TextStyle(color: Colors.black.withOpacity(0.6)),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],

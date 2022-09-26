@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gopizza/src/auth/components/custom_text_field.dart';
+import 'package:gopizza/src/pages/auth/components/custom_text_field.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class SignUpScreen extends StatelessWidget {

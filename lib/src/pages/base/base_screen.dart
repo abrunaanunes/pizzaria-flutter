@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gopizza/src/base/home/home_page.dart';
+
+import '../home/home_page.dart';
 
 class BaseScreen extends StatefulWidget {
   const BaseScreen({Key? key}) : super(key: key);
