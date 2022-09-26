@@ -1,13 +1,14 @@
+import 'package:gopizza/src/models/price.dart';
+
 class Product {
   String name;
   String imgUrl;
-  double price;
   String description;
+  List<Price> price;
 
-  Product({
-    required this.name,
-    required this.imgUrl,
-    required this.price,
-    required this.description,
-  });
+  Product(
+      {required this.name,
+      required this.imgUrl,
+      required this.description,
+      required this.price});
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gopizza/src/pages/profile/profile_page.dart';
 
 import '../home/home_page.dart';
 
@@ -22,8 +23,7 @@ class _BaseScreenState extends State<BaseScreen> {
         children: [
           const HomePage(),
           Container(color: Colors.yellow),
-          Container(color: Colors.blue),
-          Container(color: Colors.purple),
+          const ProfilePage(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

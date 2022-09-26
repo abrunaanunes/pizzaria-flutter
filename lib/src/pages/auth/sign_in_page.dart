@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gopizza/src/pages/auth/components/custom_text_field.dart';
-import 'package:gopizza/src/pages/auth/sign_up_screen.dart';
-import '../base/base_screen.dart';
+import 'package:gopizza/src/pages/auth/sign_up_page.dart';
+import 'package:gopizza/src/pages/components/custom_text_field.dart';
+import '../base/base_app.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({super.key});

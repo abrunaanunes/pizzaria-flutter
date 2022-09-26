@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gopizza/src/pages/auth/sign_in_screen.dart';
+import 'package:gopizza/src/pages/auth/sign_in_page.dart';
 
 void main() {
   runApp(const MyApp());

@@ -36,6 +36,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
         inputFormatters: widget.inputFormatters,
         obscureText: isObscure,
         decoration: InputDecoration(
+          filled: true,
+          fillColor: Colors.white,
           prefixIcon: Icon(widget.icon),
           suffixIcon: widget.isSecret
               ? IconButton(
