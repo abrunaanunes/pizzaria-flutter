@@ -1,4 +1,4 @@
-# GoPizza
+# UTFPizza
 
 ## Atenção!
 Este projeto foi desenvolvido para fins de avaliação para a disciplina de Desenvolvimento Mobile
