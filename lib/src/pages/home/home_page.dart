@@ -2,6 +2,8 @@ import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'components/category_tile.dart';
 import 'package:gopizza/src/repositories/home.dart' as home_repository;
+import 'package:gopizza/src/repositories/pizza_repository.dart'
+    as pizza_repository;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,6 +17,8 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     Color customGreyColor = const Color.fromARGB(255, 68, 66, 67);
     String selectedCategory = 'Tradicionais';
+    final size = MediaQuery.of(context).size;
+
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.transparent,
@@ -114,28 +118,44 @@ class _HomePageState extends State<HomePage> {
                   itemCount: home_repository.categories.length,
                 ),
               ),
-              Card(
-                clipBehavior: Clip.antiAlias,
-                child: Column(
-                  children: [
-                    ListTile(
-                      title: const Text('Pizza de calabresa'),
-                      subtitle: Text(
-                        'Serve duas pessoas',
-                        style: TextStyle(color: Colors.black.withOpacity(0.6)),
-                      ),
-                    ),
-                    Image.asset('assets/images/pizza_calabresa.jpg'),
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Text(
-                        'Molho de tomate, muçarela, calabresa fatiada, cebola fatiada, palmito, azeitonas verdes fatiada e orégano.',
-                        style: TextStyle(color: Colors.black.withOpacity(0.6)),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              Expanded(
+                child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (_, index) {
+                      return SizedBox(
+                        width: 350,
+                        child: Card(
+                          clipBehavior: Clip.antiAlias,
+                          child: Column(
+                            children: [
+                              ListTile(
+                                title: Text(
+                                  pizza_repository.products[index].name,
+                                ),
+                                subtitle: Text(
+                                  'Serve duas pessoas',
+                                  style: TextStyle(
+                                      color: Colors.black.withOpacity(0.6)),
+                                ),
+                              ),
+                              Image.asset(
+                                  pizza_repository.products[index].imgUrl),
+                              Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Text(
+                                  pizza_repository.products[index].description,
+                                  style: TextStyle(
+                                      color: Colors.black.withOpacity(0.6)),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                    separatorBuilder: (_, index) => const SizedBox(width: 10),
+                    itemCount: pizza_repository.products.length),
+              )
             ],
           ),
         ));
