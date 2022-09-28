@@ -1,5 +1,6 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:gopizza/src/pages/home/components/product_tile.dart';
 import 'components/category_tile.dart';
 import 'package:gopizza/src/repositories/home.dart' as home_repository;
 import 'package:gopizza/src/repositories/pizza_repository.dart'
@@ -46,117 +47,98 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Column(
-            children: [
-              Text.rich(
-                TextSpan(
-                  style: const TextStyle(
-                    fontSize: 45,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  children: [
+        body: SingleChildScrollView(
+          child: SizedBox(
+            height: size.height,
+            width: size.width,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Column(
+                children: [
+                  Text.rich(
                     TextSpan(
-                      text: "Sua pizza favorita em ",
-                      style: TextStyle(color: customGreyColor),
-                    ),
-                    const TextSpan(
-                      text: "menos de 30 minutos",
-                      style: TextStyle(
-                        color: Colors.red,
+                      style: const TextStyle(
+                        fontSize: 45,
+                        fontWeight: FontWeight.bold,
                       ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              TextFormField(
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.white,
-                  isDense: true,
-                  hintText: "Buscar...",
-                  hintStyle: TextStyle(
-                    color: Colors.grey.shade400,
-                    fontSize: 16,
-                  ),
-                  prefixIcon: const Icon(
-                    Icons.search,
-                    color: Colors.grey,
-                    size: 21,
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(60),
-                    borderSide: const BorderSide(
-                      width: 0,
-                      style: BorderStyle.none,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Container(
-                padding: const EdgeInsets.only(
-                  left: 16,
-                ),
-                height: 40,
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (_, index) {
-                    return CategoryTile(
-                      category: home_repository.categories[index],
-                      isSelected:
-                          home_repository.categories[index] == selectedCategory,
-                    );
-                  },
-                  separatorBuilder: (_, index) => const SizedBox(width: 10),
-                  itemCount: home_repository.categories.length,
-                ),
-              ),
-              Expanded(
-                child: ListView.separated(
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (_, index) {
-                      return SizedBox(
-                        width: 350,
-                        child: Card(
-                          clipBehavior: Clip.antiAlias,
-                          child: Column(
-                            children: [
-                              ListTile(
-                                title: Text(
-                                  pizza_repository.products[index].name,
-                                ),
-                                subtitle: Text(
-                                  'Serve duas pessoas',
-                                  style: TextStyle(
-                                      color: Colors.black.withOpacity(0.6)),
-                                ),
-                              ),
-                              Image.asset(
-                                  pizza_repository.products[index].imgUrl),
-                              Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: Text(
-                                  pizza_repository.products[index].description,
-                                  style: TextStyle(
-                                      color: Colors.black.withOpacity(0.6)),
-                                ),
-                              ),
-                            ],
+                      children: [
+                        TextSpan(
+                          text: "Sua pizza favorita em ",
+                          style: TextStyle(color: customGreyColor),
+                        ),
+                        const TextSpan(
+                          text: "menos de 30 minutos",
+                          style: TextStyle(
+                            color: Colors.red,
                           ),
                         ),
-                      );
-                    },
-                    separatorBuilder: (_, index) => const SizedBox(width: 10),
-                    itemCount: pizza_repository.products.length),
-              )
-            ],
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      isDense: true,
+                      hintText: "Buscar...",
+                      hintStyle: TextStyle(
+                        color: Colors.grey.shade400,
+                        fontSize: 16,
+                      ),
+                      prefixIcon: const Icon(
+                        Icons.search,
+                        color: Colors.grey,
+                        size: 21,
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(60),
+                        borderSide: const BorderSide(
+                          width: 0,
+                          style: BorderStyle.none,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.only(
+                      left: 16,
+                    ),
+                    height: 40,
+                    child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (_, index) {
+                        return CategoryTile(
+                          category: home_repository.categories[index],
+                          isSelected: home_repository.categories[index] ==
+                              selectedCategory,
+                        );
+                      },
+                      separatorBuilder: (_, index) => const SizedBox(width: 10),
+                      itemCount: home_repository.categories.length,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 400,
+                    child: ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (_, index) {
+                          return ProductTile(
+                            product: pizza_repository.products[index],
+                          );
+                        },
+                        separatorBuilder: (_, index) =>
+                            const SizedBox(width: 10),
+                        itemCount: pizza_repository.products.length),
+                  )
+                ],
+              ),
+            ),
           ),
         ));
   }
