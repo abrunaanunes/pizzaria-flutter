@@ -4,7 +4,7 @@ class Product {
   String name;
   String imgUrl;
   String description;
-  List<Price> price;
+  Price price;
 
   Product(
       {required this.name,
