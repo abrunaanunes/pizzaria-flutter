@@ -1,4 +1,4 @@
-# GoPizza
+# UTFPizza
 
 ## Atenção!
 Este projeto foi desenvolvido para fins de avaliação para a disciplina de Desenvolvimento Mobile
@@ -14,4 +14,4 @@ O sistema GoPizza é uma proposta de aplicativo de delivery de pizza. Nesse sent
 ## Partes desenvolvidas:
 #### Bruna Nunes (RA: 2328585)
 #### Maria Eduarda Freitas (RA: 2317559)
-#### Caroline Wagner (RA: 0000000)
+#### Caroline Wagner (RA: 2281570)
