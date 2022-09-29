@@ -1,5 +1,6 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:gopizza/src/pages/cart/cart_page.dart';
 import 'package:gopizza/src/pages/home/components/product_tile.dart';
 import 'components/category_tile.dart';
 import 'package:gopizza/src/repositories/home.dart' as home_repository;
@@ -31,7 +32,15 @@ class _HomePageState extends State<HomePage> {
                 right: 15,
               ),
               child: GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (c) {
+                        return const CartPage();
+                      },
+                    ),
+                  );
+                },
                 child: Badge(
                   badgeColor: Colors.redAccent,
                   badgeContent: const Text(
