@@ -5,8 +5,7 @@ Product pizza1 = Product(
   name: 'Alho e Oléo',
   imgUrl: 'assets/images/alho_e_oleo.jpg',
   price: Price(small: 0, large: 0, extraLarge: 0),
-  description:
-      'Molho de tomate, muçarela, alho e óleo e orégano.Molho de tomate, muçarela, alho e óleo e orégano.Molho de tomate, muçarela, alho e óleo e orégano.Molho de tomate, muçarela, alho e óleo e orégano.Molho de tomate, muçarela, alho e óleo e orégano.Molho de tomate, muçarela, alho e óleo e orégano.Molho de tomate, muçarela, alho e óleo e orégano.',
+  description: 'Molho de tomate, muçarela, alho e óleo e orégano.',
 );
 
 // Product pizza2 = Product(
