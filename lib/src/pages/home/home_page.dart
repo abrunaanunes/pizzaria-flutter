@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:gopizza/src/pages/cart/cart_page.dart';
 import 'package:gopizza/src/pages/home/components/product_tile.dart';
 import 'components/category_tile.dart';
-import 'package:gopizza/src/repositories/home.dart' as home_repository;
-import 'package:gopizza/src/repositories/pizza_repository.dart'
-    as pizza_repository;
+import 'package:gopizza/src/repositories/home_repository.dart'
+    as home_repository;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -138,12 +137,12 @@ class _HomePageState extends State<HomePage> {
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (_, index) {
                           return ProductTile(
-                            product: pizza_repository.products[index],
+                            product: home_repository.products[index],
                           );
                         },
                         separatorBuilder: (_, index) =>
                             const SizedBox(width: 10),
-                        itemCount: pizza_repository.products.length),
+                        itemCount: home_repository.products.length),
                   )
                 ],
               ),

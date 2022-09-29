@@ -8,13 +8,6 @@ Product pizza1 = Product(
   description: 'Molho de tomate, muçarela, alho e óleo e orégano.',
 );
 
-// Product pizza2 = Product(
-//   name: 'Calabresa',
-//   imgUrl: 'assets/assets/images/pizza_calabresa.jpg',
-//   price: Price(small: 35.00, large: 35.00, extraLarge: 35.00),
-//   description: 'Pizza salgada',
-// );
-
 Product pizza3 = Product(
   name: 'Margherita',
   imgUrl: 'assets/images/margherita.jpg',
@@ -22,13 +15,6 @@ Product pizza3 = Product(
   description:
       'Molho de tomate, muçarela, tomate, parmesão, manjericão fresco e orégano.',
 );
-
-// Product pizza4 = Product(
-//   name: 'Milho',
-//   imgUrl: 'assets/images/milho.jpg',
-//   price: Price(small: 35.00, large: 35.00, extraLarge: 35.00),
-//   description: 'Molho de tomate, muçarela, milho e orégano.',
-// );
 
 Product pizza5 = Product(
   imgUrl: 'assets/images/mucarela.jpg',
@@ -460,5 +446,3 @@ Product pizza69 = Product(
   description:
       'Fina camada de muçarela, chocolate preto e granulado de chocolate preto.',
 );
-
-List<Product> products = [pizza1, pizza3, pizza5, pizza6, pizza7];
