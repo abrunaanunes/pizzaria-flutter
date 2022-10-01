@@ -2,94 +2,61 @@ import 'package:flutter/material.dart';
 import 'package:gopizza/src/models/product.dart';
 import 'package:gopizza/src/services/utils_services.dart';
 
-class PriceTile extends StatelessWidget {
+class PriceTile extends StatefulWidget {
   PriceTile({super.key, required this.product});
-  UtilsServices utilsServices = UtilsServices();
   final Product product;
+
+  @override
+  State<PriceTile> createState() => _PriceTileState();
+}
+
+class _PriceTileState extends State<PriceTile> {
+  UtilsServices utilsServices = UtilsServices();
+
+  int _value = 1;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 8),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 3),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  "Pequena",
-                  style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                Text(
-                  utilsServices.priceToCurrency(
-                    product.price.small,
-                  ),
-                  style: const TextStyle(
-                    color: Colors.red,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ],
+          RadioListTile(
+            contentPadding: EdgeInsets.zero,
+            value: 1,
+            groupValue: _value,
+            onChanged: (val) => setState(() => _value = val as int),
+            title: Text(
+              utilsServices.priceToCurrency(
+                widget.product.price.small,
+              ),
             ),
+            subtitle: const Text("Pequena"),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 3),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  "Grande",
-                  style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                Text(
-                  utilsServices.priceToCurrency(
-                    product.price.small,
-                  ),
-                  style: const TextStyle(
-                    color: Colors.red,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ],
+          RadioListTile(
+            contentPadding: EdgeInsets.zero,
+            value: 2,
+            groupValue: _value,
+            onChanged: (val) => setState(() => _value = val as int),
+            title: Text(
+              utilsServices.priceToCurrency(
+                widget.product.price.large,
+              ),
             ),
+            subtitle: const Text("Grade"),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 3),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  "Gigante",
-                  style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                Text(
-                  utilsServices.priceToCurrency(
-                    product.price.small,
-                  ),
-                  style: const TextStyle(
-                    color: Colors.red,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ],
+          RadioListTile(
+            contentPadding: EdgeInsets.zero,
+            value: 3,
+            groupValue: _value,
+            onChanged: (val) => setState(() => _value = val as int),
+            title: Text(
+              utilsServices.priceToCurrency(
+                widget.product.price.extraLarge,
+              ),
             ),
+            subtitle: const Text("Gigante"),
           ),
         ],
       ),

@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
                 child: Badge(
                   badgeColor: Colors.redAccent,
                   badgeContent: const Text(
-                    '2',
+                    '3',
                     style: TextStyle(color: Colors.white, fontSize: 12),
                   ),
                   child: const Icon(

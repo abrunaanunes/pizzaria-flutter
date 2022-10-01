@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gopizza/src/pages/cart/components/product_tile.dart';
-import 'package:gopizza/src/repositories/pizza_repository.dart'
-    as pizza_repository;
+import 'package:gopizza/src/repositories/cart_repository.dart'
+    as cart_repository;
 
 class CartPage extends StatelessWidget {
   const CartPage({super.key});
@@ -22,11 +22,11 @@ class CartPage extends StatelessWidget {
                   child: ListView.separated(
                       itemBuilder: (_, index) {
                         return ProductTile(
-                            product: pizza_repository.products[index]);
+                            product: cart_repository.products[index]);
                       },
                       separatorBuilder: (_, index) =>
                           const SizedBox(height: 10),
-                      itemCount: pizza_repository.products.length),
+                      itemCount: cart_repository.products.length),
                 )),
           ),
           Container(

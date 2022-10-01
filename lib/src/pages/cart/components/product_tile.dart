@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:gopizza/src/models/product.dart';
 
-class ProductTile extends StatelessWidget {
+import '../../../services/utils_services.dart';
+
+class ProductTile extends StatefulWidget {
   const ProductTile({super.key, required this.product});
   final Product product;
+
+  @override
+  State<ProductTile> createState() => _ProductTileState();
+}
+
+class _ProductTileState extends State<ProductTile> {
+  UtilsServices utilsServices = UtilsServices();
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +37,7 @@ class ProductTile extends StatelessWidget {
                   ),
                   image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: AssetImage(product.imgUrl),
+                    image: AssetImage(widget.product.imgUrl),
                   ),
                 ),
               ),
@@ -41,7 +50,7 @@ class ProductTile extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        product.name,
+                        widget.product.name,
                         style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -49,10 +58,12 @@ class ProductTile extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                        child: Row(children: const [
+                        child: Row(children: [
                       Text(
-                        "35,00",
-                        style: TextStyle(
+                        utilsServices.priceToCurrency(
+                          widget.product.price.large,
+                        ),
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                           color: Colors.red,
