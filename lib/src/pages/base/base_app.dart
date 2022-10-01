@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gopizza/src/pages/order/order_page.dart';
 import 'package:gopizza/src/pages/profile/profile_page.dart';
 
 import '../home/home_page.dart';
@@ -20,10 +21,10 @@ class _BaseScreenState extends State<BaseScreen> {
       body: PageView(
         physics: const NeverScrollableScrollPhysics(),
         controller: pageController,
-        children: [
-          const HomePage(),
-          Container(color: Colors.yellow),
-          const ProfilePage(),
+        children: const [
+          HomePage(),
+          OrderPage(),
+          ProfilePage(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
