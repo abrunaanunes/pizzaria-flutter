@@ -5,10 +5,13 @@ class Product {
   String imgUrl;
   String description;
   Price price;
+  double? choosedSize;
 
-  Product(
-      {required this.name,
-      required this.imgUrl,
-      required this.description,
-      required this.price});
+  Product({
+    required this.name,
+    required this.imgUrl,
+    required this.description,
+    required this.price,
+    this.choosedSize,
+  });
 }

@@ -5,7 +5,7 @@ class User {
   String email;
   String cpf;
   String phone;
-  Address address;
+  List<Address> address;
 
   User({
     required this.name,
