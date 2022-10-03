@@ -7,6 +7,8 @@ class Address {
   String state;
   String zipCode;
   String country;
+  bool isMain;
+  String name;
 
   Address({
     required this.address,
@@ -17,5 +19,7 @@ class Address {
     required this.state,
     required this.zipCode,
     required this.country,
+    required this.isMain,
+    required this.name,
   });
 }
