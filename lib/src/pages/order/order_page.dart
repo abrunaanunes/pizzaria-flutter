@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gopizza/src/pages/order/components/product_tile.dart';
+import 'package:gopizza/src/pages/order/components/order_tile.dart';
 import 'package:gopizza/src/repositories/order_repository.dart'
     as order_repository;
 
@@ -40,7 +40,7 @@ class OrderPage extends StatelessWidget {
               child: SizedBox(
                 child: ListView.separated(
                   itemBuilder: (_, index) {
-                    return ProductTile(order: order_repository.orders[index]);
+                    return OrderTile(order: order_repository.orders[index]);
                   },
                   separatorBuilder: (_, index) => const SizedBox(height: 10),
                   itemCount: order_repository.orders.length,

@@ -30,46 +30,46 @@ class CartPage extends StatelessWidget {
                 )),
           ),
           Container(
-              height: 150,
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: const BorderRadius.vertical(
-                    top: Radius.circular(30),
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.shade300,
-                      blurRadius: 3,
-                      spreadRadius: 2,
-                    )
-                  ]),
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 30),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Expanded(child: Container()),
-                    SizedBox(
-                      height: 50,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18),
-                          ),
+            height: 150,
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(30),
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.shade300,
+                    blurRadius: 3,
+                    spreadRadius: 2,
+                  )
+                ]),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 30),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Expanded(child: Container()),
+                  SizedBox(
+                    height: 50,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18),
                         ),
-                        onPressed: () {},
-                        child: const Text(
-                          "Finalizar pedido",
-                          style: TextStyle(
-                            fontSize: 18,
-                          ),
+                      ),
+                      onPressed: () {},
+                      child: const Text(
+                        "Finalizar pedido",
+                        style: TextStyle(
+                          fontSize: 18,
                         ),
                       ),
                     ),
-                  ],
-                ),
-              ))
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );
