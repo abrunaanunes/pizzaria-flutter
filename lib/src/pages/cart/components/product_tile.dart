@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gopizza/src/models/product.dart';
+import 'package:gopizza/src/pages/cart/components/quantity_widget.dart';
 
 import '../../../services/utils_services.dart';
 
@@ -58,18 +59,24 @@ class _ProductTileState extends State<ProductTile> {
                       ),
                     ),
                     SizedBox(
-                        child: Row(children: [
-                      Text(
-                        utilsServices.priceToCurrency(
-                          widget.product.price.large,
-                        ),
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.red,
-                        ),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              utilsServices.priceToCurrency(
+                                widget.product.price.large,
+                              ),
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.red,
+                              ),
+                            ),
+                          ),
+                          const QuantityWidget()
+                        ],
                       ),
-                    ])),
+                    ),
                   ],
                 ),
               ),

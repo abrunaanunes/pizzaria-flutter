@@ -12,86 +12,64 @@ class ProductPage extends StatelessWidget {
     return Scaffold(
         body: Stack(
       children: [
-        Column(
+        ListView(
           children: [
-            Expanded(
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                  // borderRadius: const BorderRadius.vertical(
-                  //   bottom: Radius.circular(20),
-                  // ),
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: AssetImage(product.imgUrl),
-                  ),
+            Container(
+              height: MediaQuery.of(context).size.width,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                // borderRadius: const BorderRadius.vertical(
+                //   bottom: Radius.circular(20),
+                // ),
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage(product.imgUrl),
                 ),
               ),
             ),
-            Expanded(
-              child: Container(
-                padding: const EdgeInsets.all(32),
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey,
-                    ),
-                  ],
-                ),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      // Nome do produto
-                      Text(
-                        product.name,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          fontSize: 27,
-                          color: Colors.black54,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      // Tamanhos e preços
-                      PriceTile(product: product),
-                      // Descrição
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 20),
-                          child: SingleChildScrollView(
-                            child: Text(
-                              product.description,
-                              style: const TextStyle(
-                                fontSize: 18,
-                                height: 1.5,
-                                color: Colors.grey,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      // Botão adicionar ao carrinho
-                      SizedBox(
-                        height: 50,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(18),
-                            ),
-                          ),
-                          onPressed: () {},
-                          child: const Text(
-                            "Adicionar ao carrinho",
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      )
-                    ]),
+            Container(
+              padding: const EdgeInsets.all(32),
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey,
+                  ),
+                ],
               ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  // Nome do produto
+                  Text(
+                    product.name,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontSize: 27,
+                      color: Colors.black54,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    child: Text(
+                      product.description,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        height: 1.5,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ),
+                  // Tamanhos e preços
+                  PriceTile(product: product),
+                  // Botão adicionar ao carrinho
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 65,
             )
           ],
         ),
@@ -106,6 +84,30 @@ class ProductPage extends StatelessWidget {
               icon: const Icon(
                 Icons.arrow_back_ios,
                 color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+        Positioned(
+          bottom: 0,
+          left: 0,
+          right: 0,
+          child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 10),
+            height: 100,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(18),
+                ),
+              ),
+              onPressed: () {},
+              child: const Text(
+                "Adicionar ao carrinho",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),

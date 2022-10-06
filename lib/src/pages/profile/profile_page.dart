@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gopizza/src/pages/profile/address/address_page.dart';
 import 'package:gopizza/src/pages/profile/components/address_tile.dart';
-import 'package:gopizza/src/pages/profile/components/cusotm_text_field.dart';
+import 'package:gopizza/src/pages/profile/components/custom_text_field.dart';
 import 'package:gopizza/src/repositories/user_repository.dart'
     as user_repository;
 
@@ -27,10 +27,10 @@ class ProfilePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const CustomTextField(icon: Icons.person, label: "Nome"),
-              const CustomTextField(icon: Icons.email, label: "E-mail"),
-              const CustomTextField(icon: Icons.file_copy, label: "CPF"),
-              const CustomTextField(icon: Icons.phone, label: "Celular"),
+              const CustomTextField(label: "Nome"),
+              const CustomTextField(label: "E-mail"),
+              const CustomTextField(label: "CPF"),
+              const CustomTextField(label: "Celular"),
               Padding(
                 padding: const EdgeInsets.symmetric(
                   vertical: 10,
@@ -91,7 +91,7 @@ class ProfilePage extends StatelessWidget {
                   itemCount: user_repository.addresses.length,
                 ),
               ),
-              Container(
+              SizedBox(
                 height: 120,
                 child: Padding(
                   padding:

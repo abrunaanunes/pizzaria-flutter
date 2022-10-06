@@ -24,6 +24,7 @@ class _PriceTileState extends State<PriceTile> {
         children: [
           RadioListTile(
             contentPadding: EdgeInsets.zero,
+            visualDensity: VisualDensity.compact,
             value: 1,
             groupValue: _value,
             onChanged: (val) => setState(() => _value = val as int),

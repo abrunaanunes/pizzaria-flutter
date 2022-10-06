@@ -2,14 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class CustomTextField extends StatefulWidget {
-  final IconData icon;
   final String label;
   final bool isSecret;
   final List<TextInputFormatter>? inputFormatters;
 
   const CustomTextField({
     super.key,
-    required this.icon,
     required this.label,
     this.isSecret = false,
     this.inputFormatters,
@@ -38,7 +36,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
         decoration: InputDecoration(
           filled: true,
           fillColor: Colors.white,
-          prefixIcon: Icon(widget.icon),
           suffixIcon: widget.isSecret
               ? IconButton(
                   onPressed: () {
