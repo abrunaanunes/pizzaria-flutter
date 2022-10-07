@@ -30,7 +30,6 @@ class _OrderTileState extends State<OrderTile> {
           ),
           clipBehavior: Clip.antiAlias,
           child: SizedBox(
-            height: 150,
             child: Row(
               children: [
                 Expanded(
