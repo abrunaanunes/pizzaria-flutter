@@ -6,6 +6,7 @@ class PaymentPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    Color customGreyColor = const Color.fromARGB(255, 68, 66, 67);
 
     return Scaffold(
       appBar: AppBar(title: const Text("Check-out")),
@@ -15,16 +16,39 @@ class PaymentPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
+            Text(
               "Faça o pagamento para finalizar o pedido.",
               style: TextStyle(
-                fontSize: 26,
+                fontSize: 32,
                 fontWeight: FontWeight.bold,
+                color: customGreyColor,
               ),
             ),
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 20),
-              child: Image.asset('assets/images/pix.jpg'),
+            const Text(
+              'Valor a ser pago: 135,00',
+              style: TextStyle(
+                fontSize: 18,
+                color: Colors.grey,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 25),
+              child: Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(25),
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.shade300,
+                        blurRadius: 3,
+                        spreadRadius: 2,
+                      )
+                    ]),
+                child: Image.asset('assets/images/pix.jpg'),
+              ),
             ),
             SizedBox(
               height: 50,
