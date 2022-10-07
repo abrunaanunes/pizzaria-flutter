@@ -4,9 +4,27 @@ import 'package:gopizza/src/pages/profile/components/address_widget.dart';
 import 'package:gopizza/src/pages/profile/components/custom_text_field.dart';
 import 'package:gopizza/src/repositories/user_repository.dart'
     as user_repository;
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
+
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  final cpfMask = MaskTextInputFormatter(
+    mask: '###.###.###-##',
+    filter: {'#': RegExp(r'[0-9]')},
+  );
+
+  final phoneMask = MaskTextInputFormatter(
+    mask: '(##) #####-####',
+    filter: {'#': RegExp(r'[0-9]')},
+  );
+
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +45,29 @@ class ProfilePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const CustomTextField(label: "Nome"),
-              const CustomTextField(label: "E-mail"),
-              const CustomTextField(label: "CPF"),
-              const CustomTextField(label: "Celular"),
+              Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    const CustomTextField(label: "Nome"),
+                    CustomTextField(
+                      label: "E-mail",
+                      validator: (value) {
+                        String email = value.toString();
+                        bool emailValid = RegExp(
+                                r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                            .hasMatch(email);
+                        if (!emailValid) {
+                          return 'Campo inválido.';
+                        }
+                      },
+                    ),
+                    CustomTextField(label: "CPF", inputFormatters: [cpfMask]),
+                    CustomTextField(
+                        label: "Celular", inputFormatters: [phoneMask]),
+                  ],
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(
                   vertical: 10,
@@ -108,7 +145,11 @@ class ProfilePage extends StatelessWidget {
                               borderRadius: BorderRadius.circular(18),
                             ),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              Navigator.of(context).pop();
+                            }
+                          },
                           child: const Text(
                             "Salvar alterações",
                             style: TextStyle(

@@ -2,9 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:gopizza/src/pages/components/custom_text_field.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
-class SignUpScreen extends StatelessWidget {
+import '../base/base_app.dart';
+
+class SignUpScreen extends StatefulWidget {
   SignUpScreen({super.key});
 
+  @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
+  final _formKey = GlobalKey<FormState>();
   final cpfMask = MaskTextInputFormatter(
     mask: '###.###.###-##',
     filter: {'#': RegExp(r'[0-9]')},
@@ -51,48 +59,72 @@ class SignUpScreen extends StatelessWidget {
                         top: Radius.circular(45),
                       ),
                     ),
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          const CustomTextField(
-                            icon: Icons.person,
-                            label: 'Nome',
-                          ),
-                          CustomTextField(
-                            icon: Icons.phone,
-                            label: 'Celular',
-                            inputFormatters: [phoneMask],
-                          ),
-                          CustomTextField(
-                            icon: Icons.file_copy,
-                            label: 'CPF',
-                            inputFormatters: [cpfMask],
-                          ),
-                          const CustomTextField(
-                            icon: Icons.email,
-                            label: 'E-mail',
-                          ),
-                          const CustomTextField(
-                            icon: Icons.lock,
-                            label: 'Senha',
-                            isSecret: true,
-                          ),
-                          SizedBox(
-                            height: 50,
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(18),
-                                ),
-                              ),
-                              onPressed: () {},
-                              child: const Text("Cadastrar usuário",
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                  )),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            const CustomTextField(
+                              icon: Icons.person,
+                              label: 'Nome',
                             ),
-                          ),
-                        ]),
+                            CustomTextField(
+                              icon: Icons.phone,
+                              label: 'Celular',
+                              inputFormatters: [phoneMask],
+                            ),
+                            CustomTextField(
+                              icon: Icons.file_copy,
+                              label: 'CPF',
+                              inputFormatters: [cpfMask],
+                            ),
+                            CustomTextField(
+                              icon: Icons.email,
+                              label: 'E-mail',
+                              validator: (value) {
+                                String email = value.toString();
+                                bool emailValid = RegExp(
+                                        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                    .hasMatch(email);
+                                if (!emailValid) {
+                                  return 'Campo inválido.';
+                                }
+                              },
+                            ),
+                            CustomTextField(
+                              icon: Icons.lock,
+                              label: 'Senha',
+                              isSecret: true,
+                              validator: (value) {
+                                if (value!.length < 6) {
+                                  return 'Campo inválido.';
+                                }
+                              },
+                            ),
+                            SizedBox(
+                              height: 50,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(18),
+                                  ),
+                                ),
+                                onPressed: () {
+                                  if (_formKey.currentState!.validate()) {
+                                    Navigator.of(context).pushReplacement(
+                                        MaterialPageRoute(builder: (c) {
+                                      return const BaseScreen();
+                                    }));
+                                  }
+                                },
+                                child: const Text("Cadastrar usuário",
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                    )),
+                              ),
+                            ),
+                          ]),
+                    ),
                   )
                 ],
               ),

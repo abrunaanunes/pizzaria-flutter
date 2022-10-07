@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gopizza/src/pages/cart/components/product_widget.dart';
+import 'package:gopizza/src/pages/cart/payment_page.dart';
 import 'package:gopizza/src/pages/profile/profile_page.dart';
 import 'package:gopizza/src/repositories/cart_repository.dart'
     as cart_repository;
@@ -137,7 +138,12 @@ class CartPage extends StatelessWidget {
                               borderRadius: BorderRadius.circular(18),
                             ),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(builder: (c) {
+                              return const PaymentPage();
+                            }));
+                          },
                           child: const Text(
                             "Finalizar pedido",
                             style: TextStyle(
