@@ -55,7 +55,7 @@ class _OrderTileState extends State<OrderTile> {
                               fontSize: 16,
                             ),
                           ),
-                          trailing: const Icon(Icons.more_vert),
+                          // trailing: const Icon(Icons.more_vert),
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(
