@@ -1,8 +1,8 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:gopizza/src/pages/cart/cart_page.dart';
-import 'package:gopizza/src/pages/home/components/product_tile.dart';
-import 'components/category_tile.dart';
+import 'package:gopizza/src/pages/home/components/product_widget.dart';
+import 'components/category_widget.dart';
 import 'package:gopizza/src/repositories/home_repository.dart'
     as home_repository;
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gopizza/src/models/product.dart';
-import 'package:gopizza/src/pages/product/components/price_tile.dart';
+import 'package:gopizza/src/pages/product/components/price_widget.dart';
 
 class ProductPage extends StatelessWidget {
   const ProductPage({super.key, required this.product});

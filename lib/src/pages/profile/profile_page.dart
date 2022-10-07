@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gopizza/src/pages/profile/address/address_page.dart';
-import 'package:gopizza/src/pages/profile/components/address_tile.dart';
+import 'package:gopizza/src/pages/profile/components/address_widget.dart';
 import 'package:gopizza/src/pages/profile/components/custom_text_field.dart';
 import 'package:gopizza/src/repositories/user_repository.dart'
     as user_repository;

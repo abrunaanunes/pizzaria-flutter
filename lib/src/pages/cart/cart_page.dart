@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:gopizza/src/pages/cart/components/product_tile.dart';
+import 'package:gopizza/src/pages/cart/components/product_widget.dart';
 import 'package:gopizza/src/pages/profile/profile_page.dart';
 import 'package:gopizza/src/repositories/cart_repository.dart'
     as cart_repository;
 import 'package:gopizza/src/repositories/user_repository.dart'
     as user_repository;
 
-import '../profile/components/address_tile.dart';
+import '../profile/components/address_widget.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({super.key});

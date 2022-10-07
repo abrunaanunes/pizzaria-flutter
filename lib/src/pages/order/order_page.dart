@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gopizza/src/pages/order/components/order_tile.dart';
+import 'package:gopizza/src/pages/order/components/order_widget.dart';
 import 'package:gopizza/src/repositories/order_repository.dart'
     as order_repository;
 
