@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:gopizza/src/pages/auth/sign_in_page.dart';
 import 'package:gopizza/src/repositories/cart_repository.dart';
+import 'package:gopizza/src/repositories/order_repository.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(
-    ChangeNotifierProvider(
-        create: (context) => CartRepository(), child: const MyApp()),
-  );
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider<CartRepository>(create: (_) => CartRepository()),
+      ChangeNotifierProvider<OrderRepository>(create: (_) => OrderRepository()),
+    ],
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {

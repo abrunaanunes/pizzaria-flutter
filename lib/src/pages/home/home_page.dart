@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
     Color customGreyColor = const Color.fromARGB(255, 68, 66, 67);
     String selectedCategory = 'Tradicionais';
     final size = MediaQuery.of(context).size;
-    cart = Provider.of<CartRepository>(context);
+    cart = Provider.of<CartRepository>(context, listen: true);
 
     return Scaffold(
         appBar: AppBar(

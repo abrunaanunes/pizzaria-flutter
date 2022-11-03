@@ -20,7 +20,7 @@ class _CartPageState extends State<CartPage> {
   late CartRepository cart;
   @override
   Widget build(BuildContext context) {
-    cart = Provider.of<CartRepository>(context);
+    cart = Provider.of<CartRepository>(context, listen: true);
     return Scaffold(
       appBar: AppBar(title: const Text("Carrinho")),
       body: Consumer<CartRepository>(builder: (context, cart, child) {
