@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:gopizza/src/pages/auth/sign_in_page.dart';
+import 'package:gopizza/src/repositories/cart_repository.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+        create: (context) => CartRepository(), child: const MyApp()),
+  );
 }
 
 class MyApp extends StatelessWidget {

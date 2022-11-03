@@ -2,6 +2,8 @@ import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:gopizza/src/pages/cart/cart_page.dart';
 import 'package:gopizza/src/pages/home/components/product_widget.dart';
+import 'package:gopizza/src/repositories/cart_repository.dart';
+import 'package:provider/provider.dart';
 import 'components/category_widget.dart';
 import 'package:gopizza/src/repositories/home_repository.dart'
     as home_repository;
@@ -14,11 +16,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late CartRepository cart;
+
   @override
   Widget build(BuildContext context) {
     Color customGreyColor = const Color.fromARGB(255, 68, 66, 67);
     String selectedCategory = 'Tradicionais';
     final size = MediaQuery.of(context).size;
+    cart = Provider.of<CartRepository>(context);
 
     return Scaffold(
         appBar: AppBar(
@@ -42,9 +47,9 @@ class _HomePageState extends State<HomePage> {
                 },
                 child: Badge(
                   badgeColor: Colors.redAccent,
-                  badgeContent: const Text(
-                    '3',
-                    style: TextStyle(color: Colors.white, fontSize: 12),
+                  badgeContent: Text(
+                    cart.products.length.toString(),
+                    style: const TextStyle(color: Colors.white, fontSize: 12),
                   ),
                   child: const Icon(
                     Icons.shopping_cart_outlined,
