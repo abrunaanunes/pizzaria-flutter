@@ -81,7 +81,7 @@ class _CartPageState extends State<CartPage> {
                         child: SizedBox(
                             child: ListView.separated(
                                 itemBuilder: (_, index) {
-                                  return ProductTile(
+                                  return ProductWidget(
                                       product: cart.products[index]);
                                 },
                                 separatorBuilder: (_, index) =>
@@ -139,7 +139,7 @@ class _CartPageState extends State<CartPage> {
                         padding: const EdgeInsets.only(
                           bottom: 15,
                         ),
-                        child: AddressTile(
+                        child: AddressWidget(
                           address: user_repository.addresses[0],
                           isMain: 1,
                         ),

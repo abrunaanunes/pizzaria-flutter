@@ -3,8 +3,8 @@ import 'package:gopizza/src/pages/product/product_page.dart';
 
 import '../../../models/product.dart';
 
-class ProductTile extends StatelessWidget {
-  const ProductTile({super.key, required this.product});
+class ProductWidget extends StatelessWidget {
+  const ProductWidget({super.key, required this.product});
 
   final Product product;
 

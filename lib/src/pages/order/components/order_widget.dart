@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:gopizza/src/models/order.dart';
 import 'package:gopizza/src/services/utils_services.dart';
 
-class OrderTile extends StatefulWidget {
-  const OrderTile({super.key, required this.order});
+class OrderWidget extends StatefulWidget {
+  const OrderWidget({super.key, required this.order});
 
   final Order order;
 
   @override
-  State<OrderTile> createState() => _OrderTileState();
+  State<OrderWidget> createState() => _OrderWidgetState();
 }
 
-class _OrderTileState extends State<OrderTile> {
+class _OrderWidgetState extends State<OrderWidget> {
   UtilsServices utilsServices = UtilsServices();
   @override
   Widget build(BuildContext context) {

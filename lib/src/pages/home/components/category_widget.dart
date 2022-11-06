@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class CategoryTile extends StatelessWidget {
-  const CategoryTile({
+class CategoryWidget extends StatelessWidget {
+  const CategoryWidget({
     super.key,
     required this.category,
     required this.isSelected,

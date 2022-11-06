@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gopizza/src/models/address.dart';
 
-class AddressTile extends StatelessWidget {
-  AddressTile({
+class AddressWidget extends StatelessWidget {
+  AddressWidget({
     super.key,
     required this.address,
     this.isMain = 0,

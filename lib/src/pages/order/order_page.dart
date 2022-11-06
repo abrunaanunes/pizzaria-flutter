@@ -69,7 +69,8 @@ class _OrderPageState extends State<OrderPage> {
                             child: SizedBox(
                               child: ListView.separated(
                                 itemBuilder: (_, index) {
-                                  return OrderTile(order: order.orders[index]);
+                                  return OrderWidget(
+                                      order: order.orders[index]);
                                 },
                                 separatorBuilder: (_, index) =>
                                     const SizedBox(height: 10),

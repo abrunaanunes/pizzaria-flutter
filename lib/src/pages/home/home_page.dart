@@ -126,7 +126,7 @@ class _HomePageState extends State<HomePage> {
                     child: ListView.separated(
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (_, index) {
-                        return CategoryTile(
+                        return CategoryWidget(
                           category: home_repository.categories[index],
                           isSelected: home_repository.categories[index] ==
                               selectedCategory,
@@ -141,7 +141,7 @@ class _HomePageState extends State<HomePage> {
                     child: ListView.separated(
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (_, index) {
-                          return ProductTile(
+                          return ProductWidget(
                             product: home_repository.products[index],
                           );
                         },

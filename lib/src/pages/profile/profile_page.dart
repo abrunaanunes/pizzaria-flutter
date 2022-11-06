@@ -115,7 +115,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: ListView.separated(
                   physics: const BouncingScrollPhysics(),
                   itemBuilder: (_, index) {
-                    return AddressTile(
+                    return AddressWidget(
                       address: user_repository.addresses[index],
                       isMain: index == 0 ? 1 : 0,
                     );

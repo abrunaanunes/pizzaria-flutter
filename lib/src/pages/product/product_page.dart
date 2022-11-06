@@ -63,8 +63,7 @@ class ProductPage extends StatelessWidget {
                     ),
                   ),
                   // Tamanhos e preços
-                  PriceTile(product: product),
-                  // Botão adicionar ao carrinho
+                  PriceWidget(product: product),
                 ],
               ),
             ),
@@ -88,6 +87,7 @@ class ProductPage extends StatelessWidget {
             ),
           ),
         ),
+        // Botão adicionar ao carrinho
         Positioned(
           bottom: 0,
           left: 0,

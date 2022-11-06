@@ -4,15 +4,15 @@ import 'package:gopizza/src/pages/cart/components/quantity_widget.dart';
 
 import '../../../services/utils_services.dart';
 
-class ProductTile extends StatefulWidget {
-  const ProductTile({super.key, required this.product});
+class ProductWidget extends StatefulWidget {
+  const ProductWidget({super.key, required this.product});
   final Product product;
 
   @override
-  State<ProductTile> createState() => _ProductTileState();
+  State<ProductWidget> createState() => _ProductWidgetState();
 }
 
-class _ProductTileState extends State<ProductTile> {
+class _ProductWidgetState extends State<ProductWidget> {
   UtilsServices utilsServices = UtilsServices();
 
   @override
