@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gopizza/src/models/product.dart';
 import 'package:gopizza/src/pages/product/components/price_widget.dart';
+import 'package:gopizza/src/repositories/cart_repository.dart';
+import 'package:provider/provider.dart';
 
 class ProductPage extends StatelessWidget {
   const ProductPage({super.key, required this.product});
@@ -8,6 +10,8 @@ class ProductPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    late CartRepository cart;
+    cart = Provider.of<CartRepository>(context, listen: true);
 
     return Scaffold(
         body: Stack(
@@ -18,9 +22,6 @@ class ProductPage extends StatelessWidget {
               height: MediaQuery.of(context).size.width,
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
-                // borderRadius: const BorderRadius.vertical(
-                //   bottom: Radius.circular(20),
-                // ),
                 image: DecorationImage(
                   fit: BoxFit.cover,
                   image: AssetImage(product.imgUrl),
@@ -101,7 +102,11 @@ class ProductPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(18),
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                if (product.choosedSize != 0.00) {
+                  cart.addItem(product);
+                }
+              },
               child: const Text(
                 "Adicionar ao carrinho",
                 style: TextStyle(

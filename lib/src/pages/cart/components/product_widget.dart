@@ -64,7 +64,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                           Expanded(
                             child: Text(
                               utilsServices.priceToCurrency(
-                                widget.product.price.large,
+                                widget.product.choosedSize,
                               ),
                               style: const TextStyle(
                                 fontSize: 18,
@@ -73,7 +73,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                               ),
                             ),
                           ),
-                          const QuantityWidget()
+                          // const QuantityWidget()
                         ],
                       ),
                     ),

@@ -5,13 +5,16 @@ class Product {
   String imgUrl;
   String description;
   Price price;
-  double? choosedSize;
+  double? _choosedSize;
 
   Product({
     required this.name,
     required this.imgUrl,
     required this.description,
     required this.price,
-    this.choosedSize,
+    choosedSize = 0.00,
   });
+
+  double get choosedSize => _choosedSize ?? 0.00;
+  set choosedSize(value) => _choosedSize = value;
 }

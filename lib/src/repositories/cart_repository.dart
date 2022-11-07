@@ -1,18 +1,21 @@
 import 'dart:collection';
 import 'package:flutter/cupertino.dart';
 import 'package:gopizza/src/models/product.dart';
-import 'package:gopizza/src/repositories/pizza_repository.dart'
-    as pizza_repository;
 
 class CartRepository extends ChangeNotifier {
-  final List<Product> _products = [];
+  List<Product> _products = [];
+  double _totalPrice = 0.00;
 
   UnmodifiableListView<Product> get products => UnmodifiableListView(_products);
 
-  saveAll(List<Product> products) {
-    products.forEach((product) {
-      if (!_products.contains(product)) _products.add(product);
-    });
+  addItem(Product product) {
+    if (!_products.contains(product)) {
+      _products.add(product);
+      totalPrice = product.choosedSize;
+    }
     notifyListeners();
   }
+
+  double get totalPrice => _totalPrice;
+  set totalPrice(double value) => _totalPrice = value;
 }

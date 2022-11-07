@@ -5,6 +5,7 @@ import 'package:gopizza/src/pages/profile/profile_page.dart';
 import 'package:gopizza/src/repositories/cart_repository.dart';
 import 'package:gopizza/src/repositories/user_repository.dart'
     as user_repository;
+import 'package:gopizza/src/services/utils_services.dart';
 import 'package:provider/provider.dart';
 
 import '../profile/components/address_widget.dart';
@@ -17,6 +18,7 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
+  UtilsServices utilsServices = UtilsServices();
   late CartRepository cart;
   @override
   Widget build(BuildContext context) {
@@ -166,16 +168,18 @@ class _CartPageState extends State<CartPage> {
                             children: [
                               Expanded(
                                 child: Row(
-                                  children: const [
-                                    Text(
+                                  children: [
+                                    const Text(
                                       "Total do pedido:",
                                       style: TextStyle(
                                         fontSize: 24,
                                       ),
                                     ),
                                     Text(
-                                      "135,00",
-                                      style: TextStyle(
+                                      utilsServices.priceToCurrency(
+                                        cart.totalPrice,
+                                      ),
+                                      style: const TextStyle(
                                         fontSize: 24,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.red,

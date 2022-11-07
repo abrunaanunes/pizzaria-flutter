@@ -13,7 +13,7 @@ class PriceWidget extends StatefulWidget {
 class _PriceWidgetState extends State<PriceWidget> {
   UtilsServices utilsServices = UtilsServices();
 
-  int _value = 1;
+  int _value = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,10 @@ class _PriceWidgetState extends State<PriceWidget> {
             visualDensity: VisualDensity.compact,
             value: 1,
             groupValue: _value,
-            onChanged: (val) => setState(() => _value = val as int),
+            onChanged: (val) => {
+              setState(() => _value = val as int),
+              setPrice(widget.product, widget.product.price.small)
+            },
             title: Text(
               utilsServices.priceToCurrency(
                 widget.product.price.small,
@@ -39,7 +42,10 @@ class _PriceWidgetState extends State<PriceWidget> {
             contentPadding: EdgeInsets.zero,
             value: 2,
             groupValue: _value,
-            onChanged: (val) => {setState(() => _value = val as int)},
+            onChanged: (val) => {
+              setState(() => _value = val as int),
+              setPrice(widget.product, widget.product.price.large)
+            },
             title: Text(
               utilsServices.priceToCurrency(
                 widget.product.price.large,
@@ -51,7 +57,10 @@ class _PriceWidgetState extends State<PriceWidget> {
             contentPadding: EdgeInsets.zero,
             value: 3,
             groupValue: _value,
-            onChanged: (val) => setState(() => _value = val as int),
+            onChanged: (val) => {
+              setState(() => _value = val as int),
+              setPrice(widget.product, widget.product.price.extraLarge)
+            },
             title: Text(
               utilsServices.priceToCurrency(
                 widget.product.price.extraLarge,
@@ -63,4 +72,8 @@ class _PriceWidgetState extends State<PriceWidget> {
       ),
     );
   }
+}
+
+void setPrice(Product product, double value) {
+  product.choosedSize = value;
 }
