@@ -14,8 +14,12 @@ class CartRepository extends ChangeNotifier {
       totalPrice = product.choosedSize;
     }
     notifyListeners();
+    // Colocar um loading pra chamar o save do banco
   }
 
   double get totalPrice => _totalPrice;
   set totalPrice(double value) => _totalPrice = value;
+
+  // Não precisa de um model do carrinho
+  // Fazer um save e um sync
 }
