@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:gopizza/src/network/api.dart';
+import 'package:gopizza/src/pages/auth/sign_in_page.dart';
 import 'package:gopizza/src/pages/profile/address/address_page.dart';
 import 'package:gopizza/src/pages/profile/components/address_widget.dart';
 import 'package:gopizza/src/pages/profile/components/custom_text_field.dart';
@@ -176,21 +177,14 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   void _logout() async {
-    var data = {};
     var res = await Network().getData('/logout');
     var body = json.decode(res.body);
-    if (body['success'] == true) {
-      print(body);
-    } else {
-      print(body);
+    if (body['success']) {
+      SharedPreferences localStorage = await SharedPreferences.getInstance();
+      localStorage.remove('user');
+      localStorage.remove('token');
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => SignInScreen()));
     }
-  }
-
-  @override
-  void initState() async {
-    super.initState();
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String userString = prefs.getString('user');
-    user = json.decode(userString);
   }
 }

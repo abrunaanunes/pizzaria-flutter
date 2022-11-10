@@ -222,7 +222,7 @@ class _SignInScreenState extends State<SignInScreen> {
       localStorage.setString('user', json.encode(body['user']));
       Navigator.push(
         context,
-        new MaterialPageRoute(builder: (context) => HomePage()),
+        new MaterialPageRoute(builder: (context) => BaseScreen()),
       );
     } else {
       print(body);

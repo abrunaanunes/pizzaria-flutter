@@ -118,13 +118,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               icon: Icons.email,
                               label: 'E-mail',
                               validator: (value) {
-                                String email = value.toString();
+                                String emailValue = value.toString();
                                 bool emailValid = RegExp(
                                         r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                                    .hasMatch(email);
+                                    .hasMatch(emailValue);
                                 if (!emailValid) {
                                   return 'Campo inválido.';
                                 }
+                                email = emailValue;
                               },
                             ),
                             CustomTextField(
@@ -135,6 +136,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 if (value!.length < 6) {
                                   return 'Campo inválido.';
                                 }
+                                password = value;
                               },
                             ),
                             SizedBox(
@@ -206,7 +208,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       localStorage.setString('user', json.encode(body['user']));
       Navigator.push(
         context,
-        new MaterialPageRoute(builder: (context) => HomePage()),
+        new MaterialPageRoute(builder: (context) => BaseScreen()),
       );
     } else {
       print(body);
