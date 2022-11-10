@@ -1,10 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:gopizza/src/network/api.dart';
 import 'package:gopizza/src/pages/profile/address/address_page.dart';
 import 'package:gopizza/src/pages/profile/components/address_widget.dart';
 import 'package:gopizza/src/pages/profile/components/custom_text_field.dart';
 import 'package:gopizza/src/repositories/user_repository.dart'
     as user_repository;
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -18,6 +22,8 @@ class _ProfilePageState extends State<ProfilePage> {
     mask: '###.###.###-##',
     filter: {'#': RegExp(r'[0-9]')},
   );
+
+  var user = {};
 
   final phoneMask = MaskTextInputFormatter(
     mask: '(##) #####-####',
@@ -35,7 +41,9 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           actions: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                _logout();
+              },
               icon: const Icon(Icons.logout),
             ),
           ],
@@ -165,5 +173,24 @@ class _ProfilePageState extends State<ProfilePage> {
             ],
           ),
         ));
+  }
+
+  void _logout() async {
+    var data = {};
+    var res = await Network().getData('/logout');
+    var body = json.decode(res.body);
+    if (body['success'] == true) {
+      print(body);
+    } else {
+      print(body);
+    }
+  }
+
+  @override
+  void initState() async {
+    super.initState();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String userString = prefs.getString('user');
+    user = json.decode(userString);
   }
 }

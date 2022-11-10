@@ -1,6 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:gopizza/src/network/api.dart';
 import 'package:gopizza/src/pages/components/custom_text_field.dart';
+import 'package:gopizza/src/pages/home/home_page.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../base/base_app.dart';
 
@@ -12,7 +17,14 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  bool _isLoading = false;
   final _formKey = GlobalKey<FormState>();
+  var name;
+  var email;
+  var password;
+  var document;
+  var phone;
+
   final cpfMask = MaskTextInputFormatter(
     mask: '###.###.###-##',
     filter: {'#': RegExp(r'[0-9]')},
@@ -64,19 +76,43 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
-                            const CustomTextField(
+                            CustomTextField(
                               icon: Icons.person,
                               label: 'Nome',
+                              validator: (value) {
+                                String nameValue = value.toString();
+                                if (value!.length < 2) {
+                                  return 'Campo inválido.';
+                                }
+                                name = nameValue;
+                                return null;
+                              },
                             ),
                             CustomTextField(
                               icon: Icons.phone,
                               label: 'Celular',
                               inputFormatters: [phoneMask],
+                              validator: (value) {
+                                String phoneValue = value.toString();
+                                if (value!.length < 8) {
+                                  return 'Campo inválido.';
+                                }
+                                phone = phoneValue;
+                                return null;
+                              },
                             ),
                             CustomTextField(
                               icon: Icons.file_copy,
                               label: 'CPF',
                               inputFormatters: [cpfMask],
+                              validator: (value) {
+                                String documentValue = value.toString();
+                                if (value!.length < 14) {
+                                  return 'Campo inválido.';
+                                }
+                                document = documentValue;
+                                return null;
+                              },
                             ),
                             CustomTextField(
                               icon: Icons.email,
@@ -111,14 +147,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 ),
                                 onPressed: () {
                                   if (_formKey.currentState!.validate()) {
-                                    Navigator.of(context).pushReplacement(
-                                        MaterialPageRoute(builder: (c) {
-                                      return const BaseScreen();
-                                    }));
+                                    _register();
                                   }
                                 },
-                                child: const Text("Cadastrar usuário",
-                                    style: TextStyle(
+                                child: Text(
+                                    _isLoading
+                                        ? "Processando..."
+                                        : "Cadastrar usuário",
+                                    style: const TextStyle(
                                       fontSize: 18,
                                     )),
                               ),
@@ -148,5 +184,36 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ),
       ),
     );
+  }
+
+  void _register() async {
+    setState(() {
+      _isLoading = true;
+    });
+    var data = {
+      'name': name,
+      'email': email,
+      'password': password,
+      'document': document,
+      'phone': phone,
+    };
+
+    var res = await Network().authData(data, '/register');
+    var body = json.decode(res.body);
+    if (body['success'] == true) {
+      SharedPreferences localStorage = await SharedPreferences.getInstance();
+      localStorage.setString('token', json.encode(body['token']));
+      localStorage.setString('user', json.encode(body['user']));
+      Navigator.push(
+        context,
+        new MaterialPageRoute(builder: (context) => HomePage()),
+      );
+    } else {
+      print(body);
+    }
+
+    setState(() {
+      _isLoading = false;
+    });
   }
 }

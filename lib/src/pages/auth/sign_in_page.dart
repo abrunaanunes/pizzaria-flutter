@@ -1,6 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:gopizza/src/network/api.dart';
 import 'package:gopizza/src/pages/auth/sign_up_page.dart';
 import 'package:gopizza/src/pages/components/custom_text_field.dart';
+import 'package:gopizza/src/pages/home/home_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../base/base_app.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -11,7 +16,10 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
+  bool _isLoading = false;
   final _formKey = GlobalKey<FormState>();
+  var email;
+  var password;
 
   @override
   Widget build(BuildContext context) {
@@ -73,13 +81,15 @@ class _SignInScreenState extends State<SignInScreen> {
                           icon: Icons.email,
                           label: 'E-mail',
                           validator: (value) {
-                            String email = value.toString();
+                            String emailValue = value.toString();
                             bool emailValid = RegExp(
                                     r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                                .hasMatch(email);
+                                .hasMatch(emailValue);
                             if (!emailValid) {
                               return 'Campo inválido.';
                             }
+                            email = emailValue;
+                            return null;
                           },
                         ),
                         // Campo de senha
@@ -91,6 +101,8 @@ class _SignInScreenState extends State<SignInScreen> {
                             if (value!.length < 6) {
                               return 'Campo inválido.';
                             }
+                            password = value.toString();
+                            return null;
                           },
                         ),
                         // Botão entrar
@@ -106,15 +118,12 @@ class _SignInScreenState extends State<SignInScreen> {
                             ),
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
-                                Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(builder: (c) {
-                                  return const BaseScreen();
-                                }));
+                                _login();
                               }
                             },
-                            child: const Text(
-                              "Entrar",
-                              style: TextStyle(
+                            child: Text(
+                              _isLoading ? 'Processando...' : 'Entrar',
+                              style: const TextStyle(
                                 fontSize: 18,
                               ),
                             ),
@@ -197,5 +206,30 @@ class _SignInScreenState extends State<SignInScreen> {
             ),
           ),
         ));
+  }
+
+  void _login() async {
+    setState(() {
+      _isLoading = true;
+    });
+    var data = {'email': email, 'password': password};
+
+    var res = await Network().authData(data, '/login');
+    var body = json.decode(res.body);
+    if (body['success'] == true) {
+      SharedPreferences localStorage = await SharedPreferences.getInstance();
+      localStorage.setString('token', json.encode(body['token']));
+      localStorage.setString('user', json.encode(body['user']));
+      Navigator.push(
+        context,
+        new MaterialPageRoute(builder: (context) => HomePage()),
+      );
+    } else {
+      print(body);
+    }
+
+    setState(() {
+      _isLoading = false;
+    });
   }
 }
