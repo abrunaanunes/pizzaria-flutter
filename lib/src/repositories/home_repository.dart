@@ -17,6 +17,4 @@ List<Product> products = [
   pizza_repository.pizza6,
   pizza_repository.pizza7,
   pizza_repository.pizza8,
-  pizza_repository.pizza9,
-  pizza_repository.pizza10
 ];

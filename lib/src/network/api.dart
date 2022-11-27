@@ -13,15 +13,13 @@ class Network {
   }
 
   authData(data, apiUrl) async {
-    var fullUrl = _url + apiUrl;
-    return await http.post(fullUrl,
+    return await http.post(Uri.https(_url, apiUrl),
         body: jsonEncode(data), headers: _setHeaders());
   }
 
   getData(apiUrl) async {
-    var fullUrl = _url + apiUrl;
     await _getToken();
-    return await http.get(fullUrl, headers: _setHeaders());
+    return await http.get(Uri.https(_url, apiUrl), headers: _setHeaders());
   }
 
   _setHeaders() => {

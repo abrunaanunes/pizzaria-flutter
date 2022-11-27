@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gopizza/src/models/product.dart';
 import 'package:gopizza/src/pages/cart/components/quantity_widget.dart';
+import 'package:gopizza/src/repositories/cart_repository.dart';
+import 'package:provider/provider.dart';
 
 import '../../../services/utils_services.dart';
 
@@ -14,9 +16,12 @@ class ProductWidget extends StatefulWidget {
 
 class _ProductWidgetState extends State<ProductWidget> {
   UtilsServices utilsServices = UtilsServices();
+  late CartRepository cart;
 
   @override
   Widget build(BuildContext context) {
+    cart = Provider.of<CartRepository>(context, listen: true);
+
     return Card(
       elevation: 1,
       shadowColor: Colors.grey.shade300,
@@ -71,6 +76,15 @@ class _ProductWidgetState extends State<ProductWidget> {
                                 fontWeight: FontWeight.bold,
                                 color: Colors.red,
                               ),
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              cart.removeItem(widget.product);
+                            },
+                            icon: const Icon(
+                              Icons.delete_outline,
+                              color: Colors.red,
                             ),
                           ),
                           // const QuantityWidget()

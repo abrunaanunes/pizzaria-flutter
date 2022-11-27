@@ -1,5 +1,6 @@
 // @dart=2.9
 import 'package:flutter/material.dart';
+import 'package:gopizza/src/configs/hive_config.dart';
 import 'package:gopizza/src/pages/auth/sign_in_page.dart';
 import 'package:gopizza/src/pages/base/base_app.dart';
 import 'package:gopizza/src/pages/home/home_page.dart';
@@ -8,7 +9,11 @@ import 'package:gopizza/src/repositories/order_repository.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Criar uma única inicialização do Hive
+  await HiveConfig.start();
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider<CartRepository>(create: (_) => CartRepository()),

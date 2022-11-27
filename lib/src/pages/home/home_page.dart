@@ -25,6 +25,9 @@ class _HomePageState extends State<HomePage> {
     final size = MediaQuery.of(context).size;
     cart = Provider.of<CartRepository>(context, listen: true);
 
+    // Puxando os dados do banco
+    cart.getItems();
+
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.transparent,
