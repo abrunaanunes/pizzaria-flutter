@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:gopizza/src/network/api.dart';
@@ -19,6 +20,26 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  late TextEditingController _nome = TextEditingController();
+  late TextEditingController _email = TextEditingController();
+  late TextEditingController _cpf = TextEditingController();
+  late TextEditingController _celular = TextEditingController();
+
+  void _buscarUsuario() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final user = prefs.getString('user') ?? '';
+    var parsedJson = json.decode(user);
+
+    if (this.mounted) {
+      setState(() {
+        _nome.text = parsedJson['name'];
+        _email.text = parsedJson['email'];
+        _cpf.text = parsedJson['document'];
+        _celular.text = parsedJson['phone'];
+      });
+    }
+  }
+
   final cpfMask = MaskTextInputFormatter(
     mask: '###.###.###-##',
     filter: {'#': RegExp(r'[0-9]')},
@@ -35,6 +56,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    _buscarUsuario();
     return Scaffold(
         appBar: AppBar(
           title: const Text(
@@ -52,29 +74,70 @@ class _ProfilePageState extends State<ProfilePage> {
         body: Padding(
           padding: const EdgeInsets.fromLTRB(16, 32, 16, 16),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Form(
-                key: _formKey,
-                child: Column(
+              SizedBox(
+                width: 100,
+                height: 100,
+                child: Stack(
                   children: [
-                    const CustomTextField(label: "Nome"),
-                    CustomTextField(
-                      label: "E-mail",
-                      validator: (value) {
-                        String email = value.toString();
-                        bool emailValid = RegExp(
-                                r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                            .hasMatch(email);
-                        if (!emailValid) {
-                          return 'Campo inválido.';
-                        }
-                      },
+                    CircleAvatar(
+                      radius: 75,
+                      backgroundColor: Colors.grey.shade200,
+                      child: const CircleAvatar(
+                        radius: 70,
+                        backgroundImage:
+                            AssetImage('assets/images/default.png'),
+                      ),
                     ),
-                    CustomTextField(label: "CPF", inputFormatters: [cpfMask]),
-                    CustomTextField(
-                        label: "Celular", inputFormatters: [phoneMask]),
+                    Positioned(
+                      bottom: 1,
+                      right: 1,
+                      child: Container(
+                        child: const Padding(
+                          padding: EdgeInsets.all(2.0),
+                          child: Icon(Icons.add_a_photo, color: Colors.black),
+                        ),
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                              width: 3,
+                              color: Colors.white,
+                            ),
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(
+                                50,
+                              ),
+                            ),
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                offset: Offset(2, 4),
+                                color: Colors.black.withOpacity(
+                                  0.3,
+                                ),
+                                blurRadius: 3,
+                              ),
+                            ]),
+                      ),
+                    ),
                   ],
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.only(top: 24),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      CustomTextField(
+                          label: "Nome", controller: _nome, enabled: true),
+                      CustomTextField(
+                          label: "E-mail", controller: _email, enabled: true),
+                      CustomTextField(
+                          label: "CPF", controller: _cpf, enabled: true),
+                      CustomTextField(
+                          label: 'Celular', controller: _celular, enabled: true)
+                    ],
+                  ),
                 ),
               ),
               Padding(
@@ -155,9 +218,9 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                           ),
                           onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              Navigator.of(context).pop();
-                            }
+                            // if (_formKey.currentState!.validate()) {
+                            //   Navigator.of(context).pop();
+                            // }
                           },
                           child: const Text(
                             "Salvar alterações",
