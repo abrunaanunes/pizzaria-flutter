@@ -13,6 +13,20 @@ class ProductPage extends StatelessWidget {
     late CartRepository cart;
     cart = Provider.of<CartRepository>(context, listen: true);
 
+    void showMessage(BuildContext context, String text) async {
+      await showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: Text(text),
+          actions: <Widget>[
+            ElevatedButton(
+                onPressed: () => Navigator.pop(ctx), child: Text("Ok"))
+          ],
+        ),
+      );
+      Navigator.pop(context);
+    }
+
     return Scaffold(
         body: Stack(
       children: [
@@ -105,11 +119,14 @@ class ProductPage extends StatelessWidget {
               onPressed: () {
                 if (product.choosedSize != 0.00) {
                   cart.addItem(product);
+                  showMessage(context, "Produto adicionado com sucesso!");
                 }
               },
-              child: const Text(
-                "Adicionar ao carrinho",
-                style: TextStyle(
+              child: Text(
+                product.choosedSize == 0.00
+                    ? "Selecione um tamanho"
+                    : "Adicionar ao carrinho",
+                style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
