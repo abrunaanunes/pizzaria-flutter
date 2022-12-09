@@ -81,8 +81,9 @@ class CartRepository extends BaseLocalStorageRepository {
   }
 
   void updateTotalPrice() {
+    totalPrice = 0;
     for (Product product in _products) {
-      totalPrice = product.choosedSize;
+      totalPrice += product.choosedSize;
     }
   }
 }
